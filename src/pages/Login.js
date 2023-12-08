@@ -34,6 +34,24 @@ function Login() {
    
   return (
     <div className="container mt-5">
+            <div className="row justify-content-center mb-3">
+                <div className="col-auto">
+                    <button
+                        className={`btn ${login ? 'btn-outline-primary' : 'btn-primary'}`}
+                        onClick={() => setLogin(false)}
+                    >
+                        Sign Up
+                    </button>
+                </div>
+                <div className="col-auto">
+                    <button
+                        className={`btn ${login ? 'btn-primary' : 'btn-outline-primary'}`}
+                        onClick={() => setLogin(true)}
+                    >
+                        Sign In
+                    </button>
+                </div>
+            </div>
       <h1 className="text-center mb-4" >{login ? 'SignIn': 'SignUp'}</h1>
       <div className="row justify-content-center">
         <div className="col-md-6">
