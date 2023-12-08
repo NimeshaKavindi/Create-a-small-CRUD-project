@@ -1,4 +1,4 @@
-
+import Add from "../img/images.png"
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -25,7 +25,11 @@ function Register() {
                   <input type="password" className="form-control" id="password"  name="password" />
                 </div>
                 <div className="mb-3">
-                  <input type = "file"/>
+                <input required style={{ display: "none" }} type="file" id="file" />
+                    <label htmlFor="file">
+                        <img src={Add} alt="" style={{ width: "50px", height: "50px", cursor: "pointer"}} />
+                        <span style={{ marginLeft: "10px", cursor: "pointer" }}>Add an avatar</span>
+                    </label>
 
                 </div>
                 <button type="submit" className="btn btn-primary">Sign Up</button>
