@@ -28,18 +28,11 @@ const Register =()=>{
                   <label htmlFor="password" className="form-label">Password</label>
                   <input type="password" className="form-control" id="password"  name="password" />
                 </div>
-                <div className="mb-3">
-                <input required style={{ display: "none" }} type="file" id="file" />
-                    <label htmlFor="file">
-                        <img src={Add} alt="" style={{ width: "50px", height: "50px", cursor: "pointer"}} />
-                        <span style={{ marginLeft: "10px", cursor: "pointer" }}>Add an avatar</span>
-                    </label>
-
-                </div>
+               
                 <button type="submit" className="btn btn-primary">Sign Up</button>
                 
               </form>
-              <p className="mt-3">If you have an account, <a href="#">login</a>.</p>
+              <p className="mt-3">If you have an account, <a href="./login">login</a>.</p>
             </div>
           </div>
         </div>
