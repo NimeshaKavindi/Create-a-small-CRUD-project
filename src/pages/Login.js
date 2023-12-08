@@ -2,8 +2,13 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {database} from "../firebase";
 import {createUserWithEmailAndPassword} from 'firebase/auth'
+import { useNavigate } from "react-router-dom";
+
 
 function Login() {
+    
+
+    const history = useNavigate()
     const handleSubmit =(e) =>{
         e.preventDefault()
         const email = e.target.email.value
@@ -11,9 +16,11 @@ function Login() {
 
         createUserWithEmailAndPassword(database, email,password ).then(data =>{
              console.log(data,"authData")
+             history('/home');
         })
 
     }
+   
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">Login</h1>
@@ -33,7 +40,7 @@ function Login() {
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
               </form>
-              <p className="mt-3">If you don't have an account, <a href="#">register</a>.</p>
+              <p className="mt-3">If you don't have an account, <a href="./register" >register</a>.</p>
             </div>
           </div>
         </div>
