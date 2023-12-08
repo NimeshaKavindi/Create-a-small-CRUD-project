@@ -1,8 +1,19 @@
-
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {database} from "../firebase";
+import {createUserWithEmailAndPassword} from 'firebase/auth'
 
 function Login() {
+    const handleSubmit =(e) =>{
+        e.preventDefault()
+        const email = e.target.email.value
+        const password = e.target.password.value
+
+        createUserWithEmailAndPassword(database, email,password ).then(data =>{
+             console.log(data,"authData")
+        })
+
+    }
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">Login</h1>
@@ -10,7 +21,7 @@ function Login() {
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <form>
+              <form onSubmit={(e) =>handleSubmit(e)}>
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label">Email address</label>
                   <input type="email" className="form-control" id="email" name="email"

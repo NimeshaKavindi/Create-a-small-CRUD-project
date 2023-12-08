@@ -1,8 +1,12 @@
 import Add from "../img/images.png"
-import React from "react";
+import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
-function Register() {
+const Register =()=>{
+    
+
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">Register</h1>
@@ -10,7 +14,7 @@ function Register() {
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <form>
+              <form >
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">Name</label>
                   <input type="text" className="form-control" id="name" name="name" />
@@ -33,6 +37,7 @@ function Register() {
 
                 </div>
                 <button type="submit" className="btn btn-primary">Sign Up</button>
+                
               </form>
               <p className="mt-3">If you have an account, <a href="#">login</a>.</p>
             </div>
