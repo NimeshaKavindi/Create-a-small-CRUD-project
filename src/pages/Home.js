@@ -21,7 +21,32 @@ function Home(){
     const [flag, setFlag] = useState(true);
     const [message, setMessage] = useState({error: false, msg:""});
 
-    
+    const handleSubmit =async(e) =>{
+         e.preventDefault();
+         setMessage("");
+         if (title ==="" || author ===""){
+          setMessage({error:true, msg:"All feilds are mandatory"});
+          return;
+         }
+         const newBook = {
+          title,
+          author,
+          status
+         }
+         console.log(newBook);
+
+         try{
+          await BookDataService.addBooks(newBook);
+          setMessage({error: false, msg:("new book added successfully")});
+         }catch(err){
+           setMessage({error: true, msg:err.message});
+         }
+
+         setTitle("");
+         setAuthor("")
+
+
+    }
     return(
         <div className="container-fluid">
         <div className="row justify-content-end mt-3">
@@ -44,7 +69,7 @@ function Home(){
         )}
 
 
-            <Form onSubmit={}>
+            <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formBookTitle">
                 <InputGroup>
                   <InputGroup.Text id="formBookTitle">B</InputGroup.Text>
