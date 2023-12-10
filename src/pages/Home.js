@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {database} from "../firebase";
 import {signOut} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import BookDataService from "../services/book.services";
 import { Link } from 'react-router-dom';
 
 
-function Home(){
+const Home = ({id, setBookId}) => {
 
     const history = useNavigate()
     const handleClick = ()=>{
@@ -37,17 +37,46 @@ function Home(){
          console.log(newBook);
 
          try{
-          await BookDataService.addBooks(newBook);
-          setMessage({error: false, msg:("new book added successfully")});
+          if(id!== undefined && id !==""){
+            await BookDataService.updateBook(id, newBook);
+            setBookId("");
+            setMessage({error: false, msg:("Updated successfully")});
+          }else{
+            await BookDataService.addBooks(newBook);
+            setMessage({error: false, msg:("new book added successfully")});
+          }
+          
          }catch(err){
            setMessage({error: true, msg:err.message});
          }
 
          setTitle("");
-         setAuthor("")
+         setAuthor("");
 
 
-    }
+    };
+
+    const editHandler = async () => {
+      setMessage("");
+      try {
+        const docSnap = await BookDataService.getBook(id);
+        console.log("the record is :", docSnap.data());
+        setTitle(docSnap.data().title);
+        setAuthor(docSnap.data().author);
+        setStatus(docSnap.data().status);
+      } catch (err) {
+        setMessage({ error: true, msg: err.message });
+      }
+    };
+  
+    useEffect(() =>{
+      console.log("Id here is: ",id)
+      if(id !== undefined && id !==""){
+        editHandler();
+      }
+
+    }, [id])
+
     return(
         <div className="container-fluid">
         <div className="row justify-content-end mt-3">
