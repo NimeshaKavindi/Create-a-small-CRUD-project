@@ -15,9 +15,13 @@ const BooksList = () => {
         setBooks(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
       };
   
+    const deleteHandler =async(id) =>{
+        await BookDataService.deleteBook(id);
+        getBooks();
+    }
   return (
     <>
-    <pre>{JSON.stringify(books, undefined, 2)}</pre>} 
+    {/*<pre>{JSON.stringify(books, undefined, 2)}</pre>*/} 
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
@@ -29,12 +33,25 @@ const BooksList = () => {
           </tr>
         </thead>
         <tbody>
-           <tr>
-            <td>1</td>
-            <td>Node Js</td>
-            <td>David</td>
-            <td>Available</td>
-           </tr>
+            {books.map((doc, index) =>{
+                return(
+                    <tr key ={doc.id}>
+                    <td>{index +1}</td> {/*because array start from 0*/}
+                    <td>{doc.title}</td>
+                    <td>{doc.author}</td>
+                    <td>{doc.status}</td>
+                    <td>
+                        <button variant = "secondary" className="edit" >
+                            Edit
+                        </button>
+                        <button variant = "danger" classaAme="delete" onClick ={(e) =>deleteHandler(doc.id)}>
+                            Delete
+                        </button>
+                    </td>
+                   </tr>  
+                )
+            })}
+           
         </tbody>
       </Table>
     </>
