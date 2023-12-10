@@ -21,6 +21,11 @@ const BooksList = () => {
     }
   return (
     <>
+    <div className="mb-2">
+        <Button variant="dark edit" onClick={getBooks}>
+           Refresh List
+        </Button>
+      </div>
     {/*<pre>{JSON.stringify(books, undefined, 2)}</pre>*/} 
       <Table striped bordered hover size="sm">
         <thead>

@@ -4,6 +4,7 @@ import {signOut} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import BookDataService from "../services/book.services";
+import { Link } from 'react-router-dom';
 
 
 function Home(){
@@ -112,6 +113,10 @@ function Home(){
               </div>
             </Form>
       </div>
+
+      <Link to="/BookList">
+        <Button variant="primary">Go to see the books list</Button>
+      </Link>
       </div>
     )
 }
