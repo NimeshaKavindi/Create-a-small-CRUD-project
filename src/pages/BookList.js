@@ -3,7 +3,7 @@ import { Table, Button } from "react-bootstrap";
 import BookDataService from "../services/book.services"
 
 
-const BooksList = () => {
+const BooksList = ({getBookId}) => {
     const [books, setBooks] = useState([]);
     useEffect(() =>{
        getBooks();
@@ -46,7 +46,7 @@ const BooksList = () => {
                     <td>{doc.author}</td>
                     <td>{doc.status}</td>
                     <td>
-                        <button variant = "secondary" className="edit" >
+                        <button variant = "secondary" className="edit" onClick ={(e) =>getBookId(doc.id)}>
                             Edit
                         </button>
                         <button variant = "danger" classaAme="delete" onClick ={(e) =>deleteHandler(doc.id)}>
