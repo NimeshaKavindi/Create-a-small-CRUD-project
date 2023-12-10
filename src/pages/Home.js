@@ -7,6 +7,8 @@ import BookDataService from "../services/book.services";
 import { Link } from 'react-router-dom';
 
 
+
+
 const Home = ({id, setBookId}) => {
 
     const history = useNavigate()
@@ -78,14 +80,15 @@ const Home = ({id, setBookId}) => {
     }, [id])
 
     return(
-        <div className="container-fluid">
+        <div className="container-fluid"  >
         <div className="row justify-content-end mt-3">
           <div className="col-auto">
             <button className="btn btn-danger" onClick={handleClick}>
               Sign Out
-            </button>
+            </button><br/><br/><br/><br/><br/><br/>
           </div>
         </div>
+        
         <div className="p-4 box">
          {/* This is a comment about using the Alert component from Bootstrap */}
          {message?.msg && (
@@ -113,7 +116,9 @@ const Home = ({id, setBookId}) => {
                   <Form.Control type="text" placeholder="Book Author" value ={author} onChange={(e) => setAuthor(e.target.value)} />
                 </InputGroup>
               </Form.Group>
+              <div className="button"></div>
               <ButtonGroup aria-label="Basic example" className="mb-3">
+              
                 <Button
                   disabled={flag}
                   variant="success"
@@ -134,6 +139,7 @@ const Home = ({id, setBookId}) => {
                 >
                   Not Available
                 </Button>
+                
               </ButtonGroup>
               <div className="d-grid gap-2">
                 <Button variant="primary" type="Submit">
@@ -142,10 +148,13 @@ const Home = ({id, setBookId}) => {
               </div>
             </Form>
       </div>
-
-      <Link to="/BookList">
-        <Button variant="primary">Go to see the books list</Button>
-      </Link>
+       <br/><br/>
+      <div className="text-end"> {/* Aligning content to the right */}
+        <Link to="/BookList">
+            <Button variant="dark">Go to see the books list</Button>
+        </Link>
+      </div>
+      
       </div>
     )
 }

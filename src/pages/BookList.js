@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
-import BookDataService from "../services/book.services"
+import BookDataService from "../services/book.services";
+import {database} from "../firebase";
+import {signOut} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 
 const BooksList = ({getBookId}) => {
+    const history = useNavigate()
+    const handleClick = ()=>{
+        signOut(database).then(val =>{
+            console.log(val,"val")
+           history('/')
+        })
+    }
     const [books, setBooks] = useState([]);
     useEffect(() =>{
        getBooks();
@@ -21,12 +31,16 @@ const BooksList = ({getBookId}) => {
     }
   return (
     <>
-    <div className="mb-2">
-        <Button variant="dark edit" onClick={getBooks}>
-           Refresh List
-        </Button>
-      </div>
-    {/*<pre>{JSON.stringify(books, undefined, 2)}</pre>*/} 
+    <div className="row justify-content-end mt-3">
+          <div className="col-auto">
+            <button className="btn btn-danger" onClick={handleClick}>
+              Sign Out
+            </button>
+          </div>
+    </div>
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      
+      {/*<pre>{JSON.stringify(books, undefined, 2)}</pre>*/} 
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
@@ -46,12 +60,14 @@ const BooksList = ({getBookId}) => {
                     <td>{doc.author}</td>
                     <td>{doc.status}</td>
                     <td>
-                        <button variant = "secondary" className="edit" onClick ={(e) =>getBookId(doc.id)}>
+                        <Button variant = "secondary" className="edit" onClick ={(e) =>getBookId(doc.id)}>
                             Edit
-                        </button>
-                        <button variant = "danger" classaAme="delete" onClick ={(e) =>deleteHandler(doc.id)}>
+                        </Button>
+                        <Button variant = "danger" className="delete" onClick ={(e) =>deleteHandler(doc.id)}>
                             Delete
-                        </button>
+                        </Button>
+                        <p>!.. After click Edit button go to previos page and change ..!</p>
+
                     </td>
                    </tr>  
                 )
@@ -59,6 +75,8 @@ const BooksList = ({getBookId}) => {
            
         </tbody>
       </Table>
+      </div>
+
     </>
   );
 };

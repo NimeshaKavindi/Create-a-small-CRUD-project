@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {database} from "../firebase";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 import { useNavigate } from "react-router-dom";
+import "../css/login.css";
 
 
 function Login() {
@@ -33,7 +34,9 @@ function Login() {
     }
    
   return (
+    
     <div className="container mt-5">
+      
             <div className="row justify-content-center mb-3">
                 <div className="col-auto">
                     <button
@@ -52,22 +55,27 @@ function Login() {
                     </button>
                 </div>
             </div>
-      <h1 className="text-center mb-4" >{login ? 'SignIn': 'SignUp'}</h1>
+            <br/><br/>
+      <h1 className="text-center mb-4"  style = {{color:"#22FB09 ", fontSize:"90px", fontWeight:"1000"}} >{login ? 'SignIn': 'SignUp'}</h1>
+      <br/><br/>
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <form onSubmit={(e) =>handleSubmit(e, login ? 'SignIn': 'SignUp')}>
+              <form  onSubmit={(e) =>handleSubmit(e, login ? 'SignIn': 'SignUp')}>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email address</label>
+                  <label htmlFor="email" className="form-label" style = {{fontSize:"18px"}}>Email address :</label>
                   <input type="email" className="form-control" id="email" name="email"
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
+                  <label htmlFor="password" className="form-label" style = {{fontSize:"18px"}}>Password : </label>
                   <input type="password" className="form-control" id="password"  name="password" />
                 </div>
-                <button type="submit" className="btn btn-primary">{login ? 'SignIn': 'SignUp'}</button>
+                <div className="button">
+                  <button type="submit" className="btn btn-primary" >{login ? 'SignIn': 'SignUp'}</button>
+ 
+                </div>
               </form>
              
             </div>
