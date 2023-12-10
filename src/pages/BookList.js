@@ -9,13 +9,15 @@ const BooksList = () => {
        getBooks();
     }, [])
 
-    const getBooks = async() =>{
-      const data = await BookDataService.get.getAllBooks();
-      console.log(data);
-    }
+    const getBooks = async () => {
+        const data = await BookDataService.getAllBooks();
+        console.log(data.docs);
+        setBooks(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+      };
   
   return (
     <>
+    <pre>{JSON.stringify(books, undefined, 2)}</pre>} 
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
